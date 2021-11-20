@@ -1,37 +1,58 @@
 ﻿using System;
+using System.IO;
 using ClassLibrary;
+
 
 namespace UI
 {
     class Program
     {
 
-        static Weather FindWeatherWithLargestWindchill(Weather[] weathers)
-        {
-            int i;
-            double max = -100;
-            Weather maxWeather = weathers[0];
-            for (i = 0; i < weathers.Length; i++)
-            {
-                if (weathers[i].GetTemperature() <= 10 && weathers[i].GetWindSpeed() > 4.8)
-                {
-                    if (weathers[i].CalculateWindChill() > maxWeather.CalculateWindChill())
-                    {
-                        max = weathers[i].CalculateWindChill();
-                        maxWeather = weathers[i];
-                    }
-
-                }
-            }
-
-            return maxWeather;
+        private static void Main(string[] args)
+        { 
+            //RunDemoForHW1();
+            RunDemoForHW2();
         }
 
 
 
 
-        private static void Main(string[] args)
+        private static void RunDemoForHW2()
         {
+            DateTime monday = new DateTime(2021, 11, 8);
+            Weather mondayWeather = new Weather(6.17, 56.13, 4.9);
+            DailyForecast mondayForecast = new DailyForecast(monday, mondayWeather);
+            Console.WriteLine(monday.ToString());
+            Console.WriteLine(mondayWeather.GetAsString());
+            Console.WriteLine(mondayForecast.GetAsString());
+
+
+            string fileName = @"C:\Users\marin\OneDrive\Desktop\weather.forecast.txt";
+            if (File.Exists(fileName) == false)
+            {
+                Console.WriteLine("The required file does not exist. Please create it, or change the path.");
+                return;
+            }
+
+            string[] dailyWeatherInputs = File.ReadAllLines(fileName);
+            DailyForecast[] dailyForecasts = new DailyForecast[dailyWeatherInputs.Length];
+
+            for (int i = 0; i < dailyForecasts.Length; i++)
+            {
+                dailyForecasts[i] = ForecastUtilities.Parse(dailyWeatherInputs[i]);
+            }
+
+            WeeklyForecast weeklyForecast = new WeeklyForecast(dailyForecasts);
+            Console.WriteLine(weeklyForecast.GetAsString());
+
+            Console.WriteLine("Maximal weekly temperature:");
+            Console.WriteLine(weeklyForecast.GetMaxTemperature());
+            Console.WriteLine(weeklyForecast[0].GetAsString());
+
+        }
+
+
+        private static void RunDemoForHW1() {
             Weather current = new Weather();
             current.SetTemperature(24.12);
             current.SetWindSpeed(3.5);
@@ -40,13 +61,7 @@ namespace UI
                 + "\ttemperature: " + current.GetTemperature() + "\n"
                 + "\thumidity: " + current.GetHumidity() + "\n"
                 + "\twind speed: " + current.GetWindSpeed() + "");
-            Console.WriteLine("Feels like: " + current.CalculateFeelsLikeTemperature()+"\n");
-
-
-            
-            
-
-            
+            Console.WriteLine("Feels like: " + current.CalculateFeelsLikeTemperature() + "\n");
             Console.WriteLine("Finding weather info with largest windchill!");
             const int Count = 5;
             double[] temperatures = new double[Count] { 8.33, -1.45, 5.00, 12.37, 7.67 };
@@ -59,15 +74,11 @@ namespace UI
                 weathers[i] = new Weather(temperatures[i], humidities[i], windSpeeds[i]);
                 Console.WriteLine("Windchill for weathers[" + i + "] is: " + weathers[i].CalculateWindChill());
             }
-            Weather largestWindchill = FindWeatherWithLargestWindchill(weathers);
+            Weather largestWindchill = ForecastUtilities.FindWeatherWithLargestWindchill(weathers);
             Console.WriteLine(
                 "Weather info:" + largestWindchill.GetTemperature() + ", " +
                 largestWindchill.GetHumidity() + ", " + largestWindchill.GetWindSpeed()
             );
-            
-
-
-
         }
     }
 }

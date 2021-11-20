@@ -14,7 +14,7 @@ namespace ClassLibrary
 
 
 
-        //KONSTRUKTORI
+        //CONSTRUCTORS
 
         public Weather()
         {
@@ -59,7 +59,7 @@ namespace ClassLibrary
             return windSpeed;
         }
 
-        //METODE
+        //METHODS
         public double CalculateFeelsLikeTemperature()
         {
             return -8.78469475556 + 1.61139411 * temperature + 2.33854883889 * humidity * 100 + -0.14611605 * humidity * 100 * temperature + -0.012308094 * (temperature * temperature) + -0.0164248277778 * ((humidity * 100) * (100 * humidity)) + 0.002211732 * (temperature * temperature) * humidity * 100 + 0.00072546 * temperature * ((humidity * 100) * (100 * humidity)) + -0.000003582 * ((humidity * 100) * (humidity * 100)) * (temperature * temperature);
@@ -73,6 +73,12 @@ namespace ClassLibrary
             }
             else
                 return 0.0;
+        }
+
+
+        public string GetAsString()
+        {
+            return $"T={temperature}°C, w={windSpeed}km/h, h={humidity}%";
         }
 
     }
