@@ -19,15 +19,15 @@ namespace ClassLibrary
 
         //METHODS
 
-        public string GetAsString()
+        public override string ToString()
         {
-            return $"{dailyForecasts[0].GetAsString()}\n" +
-                   $"{dailyForecasts[1].GetAsString()}\n" +
-                   $"{dailyForecasts[2].GetAsString()}\n" +
-                   $"{dailyForecasts[3].GetAsString()}\n" +
-                   $"{dailyForecasts[4].GetAsString()}\n" +
-                   $"{dailyForecasts[5].GetAsString()}\n" +
-                   $"{dailyForecasts[6].GetAsString()}\n";
+            return $"{dailyForecasts[0].ToString()}\n" +
+                   $"{dailyForecasts[1].ToString()}\n" +
+                   $"{dailyForecasts[2].ToString()}\n" +
+                   $"{dailyForecasts[3].ToString()}\n" +
+                   $"{dailyForecasts[4].ToString()}\n" +
+                   $"{dailyForecasts[5].ToString()}\n" +
+                   $"{dailyForecasts[6].ToString()}\n";
         }
 
 

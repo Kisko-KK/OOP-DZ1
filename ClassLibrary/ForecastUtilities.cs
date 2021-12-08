@@ -49,5 +49,18 @@ namespace ClassLibrary
             }
             return maxWeather;
         }
+
+
+        public static void PrintWeathers(IPrinter[] printers, Weather[] weathers)
+        {
+            foreach(IPrinter printer in printers)
+            {
+                foreach (Weather weather in weathers)
+                {
+                    printer.Print(printer, weather);
+                }
+            }
+        }
+
     }
 }

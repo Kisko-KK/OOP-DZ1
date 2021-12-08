@@ -36,9 +36,9 @@ namespace ClassLibrary
 
         //METHODS
 
-        public string GetAsString()
+        public override string ToString()
         {
-            return $"{date.ToString("dd/MM/yyyy HH:mm:ss")}: {dayWeather.GetAsString()}";
+            return $"{date.ToString("dd/MM/yyyy HH:mm:ss")}: {dayWeather.ToString()}";
 
         }
 

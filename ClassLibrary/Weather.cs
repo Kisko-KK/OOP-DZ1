@@ -76,7 +76,7 @@ namespace ClassLibrary
         }
 
 
-        public string GetAsString()
+        public override string ToString()
         {
             return $"T={temperature}°C, w={windSpeed}km/h, h={humidity}%";
         }
