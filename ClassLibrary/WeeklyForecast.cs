@@ -38,7 +38,7 @@ namespace ClassLibrary
             {
                 if (dailyForecasts[i] > max)
                 {
-                    max = dailyForecasts[i].DayWeather.GetTemperature();
+                    max = dailyForecasts[i].Weather.GetTemperature();
                 }
 
             }

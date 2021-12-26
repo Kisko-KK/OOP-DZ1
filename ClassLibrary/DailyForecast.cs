@@ -27,11 +27,17 @@ namespace ClassLibrary
         }
 
 
+
+
         //PROPERTIES
 
-        public Weather DayWeather
+        public Weather Weather
         {
             get { return dayWeather; }
+        }
+        public DateTime Date
+        {
+            get { return date; }
         }
 
         //METHODS
@@ -52,7 +58,7 @@ namespace ClassLibrary
             return left.dayWeather.GetTemperature() > right;
         }
 
-
+        
 
     }
 }

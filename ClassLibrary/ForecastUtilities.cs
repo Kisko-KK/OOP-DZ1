@@ -62,5 +62,11 @@ namespace ClassLibrary
             }
         }
 
+
+        public static bool IsTheSameDate(DateTime left, DateTime right)
+        {
+            return left.Day == right.Day && left.Date.Month == right.Month && left.Date.Year == right.Year;
+        }
+
     }
 }
